@@ -51,7 +51,7 @@ class GeminiChatbot {
             <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px; padding: 15px; margin: 15px 0; text-align: center;">
                 <strong style="color: #198754;">Demo API Key (Ready to Use):</strong><br>
                 <code style="background: white; padding: 5px; border-radius: 3px; font-size: 12px; word-break: break-all; display: inline-block; margin: 5px 0; border: 1px solid #ccc;">AIzaSyD_dG23Yn4klYkTAU3kLPPcSufukhJGoYw</code><br>
-                <button onclick="document.getElementById('apiKeyInput').value='AIzaSyD_dG23Yn4klYkTAU3kLPPcSufukhJGoYw'" 
+                <button onclick="document.getElementById('apiKeyInput').value='AIzaSyA8_dzJDP0xROBKoLi6FqaP2mb1oLe_yb0'" 
                         style="background: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 3px; font-size: 12px; cursor: pointer; margin-top: 5px;">
                     📋 Copy to Input
                 </button>
