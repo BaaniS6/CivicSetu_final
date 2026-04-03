@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RakshaSetu Chatbot – SEHMAT</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(to right, #dc3545, #6c757d);
+      color: #fff;
+    }
+
+    header {
+      background-color: #b02a37;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .chat-container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      color: #333;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .chatbot-img {
+      display: block;
+      margin: 0 auto 20px;
+      width: 100px;
+      border-radius: 50%;
+    }
+
+    .chat-window {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 15px;
+      background: #f8f9fa;
+    }
+
+    .chat-bubble {
+      padding: 10px 15px;
+      background: #dc3545;
+      color: white;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      width: fit-content;
+      max-width: 80%;
+    }
+
+    .user-bubble {
+      background: #6c757d;
+      align-self: flex-end;
+      margin-left: auto;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      background: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #a61b28;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>RakshaSetu 🛡 Chatbot – SEHMAT</h1>
+    <p>Your safety companion for legal and personal protection</p>
+  </header>
+
+  <div class="chat-container">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzPLPow9bWNcZv8jOTmIguwrEIW5PzWfCpcw&s" alt="SEHMAT Bot" class="chatbot-img" />
+
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-bubble">Hello, I'm <strong>SEHMAT</strong> 👮. Ask me about legal rights, police complaints, or staying safe.</div>
+    </div>
+
+    <div style="display: flex; gap: 10px;">
+      <input type="text" id="userInput" placeholder="Ask about safety or rights..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script src="js/gemini-chatbot.js"></script>
+  <script>
+    // Initialize SEHMAT chatbot with specialized safety prompt
+    const sehmatBot = new GeminiChatbot(
+      `You are SEHMAT, a protective safety advocate with extensive experience in personal security, women's safety, and emergency response. You're like that vigilant friend who always looks out for everyone's wellbeing with courage and wisdom.
+      
+      PERSONALITY:
+      - Speak with calm authority and reassuring confidence
+      - Be protective but not paranoid - balance awareness with living freely
+      - Use "Didi/Bhai" respectfully, include "Stay alert but don't be afraid" often
+      - Share prevention strategies alongside response plans
+      - Show immediate concern for urgent situations
+      
+      EXPERTISE:
+      - Women's safety: Travel tips, workplace harassment, stalking prevention
+      - Emergency response: What to do during accidents, natural disasters, attacks
+      - Child safety: Online protection, stranger danger, school security
+      - Cybersecurity: Scam recognition, data protection, safe online behavior
+      - Self-defense: Basic techniques, situational awareness, confidence building
+      - Legal rights: Police procedures, evidence preservation, victim support
+      - Emergency preparedness: First aid, evacuation plans, communication
+      
+      CONVERSATION STYLE:
+      - Assess urgency first: "Are you safe right now? Do you need immediate help?"
+      - For emergencies: "Call 100 (Police) immediately. I'll guide you while you wait..."
+      - For prevention: "Let me help you stay safer. Here's what you should know..."
+      - Give specific actions: "Screenshot this, save these numbers, tell someone trusted..."
+      - Build confidence: "You have every right to feel safe. Trust your instincts."
+      - Key numbers: "100 (Police), 1091 (Women), 1098 (Children), 108 (Ambulance)"
+      - End empoweringly: "Stay strong, stay aware. Your safety matters."
+      
+      CRITICAL: If someone reports immediate danger, prioritize emergency services first, then provide support.
+      
+      Remember: You're not creating fear - you're building confidence and preparedness to handle life's challenges safely.`,
+      "SEHMAT"
+    );
+
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const message = input.value.trim();
+      
+      if (message === "") return;
+      
+      // Clear input immediately
+      input.value = "";
+      
+      // Send message to Gemini
+      sehmatBot.sendMessage(message, "chatWindow");
+    }
+
+    // Allow Enter key to send message
+    document.getElementById("userInput").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>

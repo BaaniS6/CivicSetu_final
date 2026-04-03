@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NyaySetu Chatbot – JOLLY</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(to right, #f12711, #f5af19);
+      color: #333;
+    }
+
+    header {
+      background-color: #c82333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .chat-container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .chatbot-img {
+      display: block;
+      margin: 0 auto 20px;
+      width: 100px;
+      border-radius: 50%;
+    }
+
+    .chat-window {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 15px;
+      background: #f8f9fa;
+    }
+
+    .chat-bubble {
+      padding: 10px 15px;
+      background: #c82333;
+      color: white;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      width: fit-content;
+      max-width: 80%;
+    }
+
+    .user-bubble {
+      background: #f5af19;
+      color: #000;
+      align-self: flex-end;
+      margin-left: auto;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      background: #c82333;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #a71d2a;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NyaySetu 🤝 Chatbot – JOLLY</h1>
+    <p>Your legal companion for justice access</p>
+  </header>
+
+  <div class="chat-container">
+    <img src="https://cdn.vectorstock.com/i/1000v/24/58/female-judge-cartoon-character-vector-37502458.jpg" alt="JOLLY" class="chatbot-img" />
+    
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-bubble">Hello! I’m <strong>JOLLY</strong> 👩‍⚖️. How can I help you with legal aid, rights, or justice access today?</div>
+    </div>
+
+    <div style="display: flex; gap: 10px;">
+      <input type="text" id="userInput" placeholder="Type your question here..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script src="js/gemini-chatbot.js"></script>
+  <script>
+    // Initialize JOLLY chatbot with specialized legal prompt
+    const jollyBot = new GeminiChatbot(
+      `You are JOLLY, a compassionate legal rights advocate with deep experience in Indian law and justice systems. You've spent years helping common people navigate legal challenges with patience, wisdom, and genuine care.
+      
+      PERSONALITY:
+      - Speak like a trusted legal counselor who truly listens
+      - Be gentle with people in distress - they may be scared or confused
+      - Use "Aapko" respectfully, include "Don't worry" often
+      - Explain complex legal terms in everyday language
+      - Show empathy: "I understand this must be difficult..."
+      
+      EXPERTISE:
+      - RTI: Filing procedures, appeals, information rights
+      - FIR/Police: When to file, what to include, your rights during questioning
+      - Women's rights: Domestic violence, workplace harassment, property rights
+      - Child protection: POCSO Act, school safety, adoption laws
+      - SC/ST rights: Atrocity prevention, reservation benefits
+      - Legal aid: Free lawyers (15100), Lok Adalat, mediation
+      - Court procedures: Bail, evidence, witness protection
+      
+      CONVERSATION STYLE:
+      - Open warmly: "Namaste. I'm here to help you understand your rights..."
+      - Ask clarifying questions: "Can you tell me more about your situation?"
+      - Break down complex processes: "Let me explain this step by step..."
+      - Provide helplines: "For immediate help, call 100 (Police) or 15100 (Legal Aid)"
+      - Always disclaim: "This is general guidance - for your specific case, please consult a qualified lawyer"
+      - End supportively: "Remember, the law is there to protect you"
+      
+      Remember: You're not just explaining law - you're empowering people to seek justice with confidence.`,
+      "JOLLY"
+    );
+
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const message = input.value.trim();
+      
+      if (message === "") return;
+      
+      // Clear input immediately
+      input.value = "";
+      
+      // Send message to Gemini
+      jollyBot.sendMessage(message, "chatWindow");
+    }
+
+    // Allow Enter key to send message
+    document.getElementById("userInput").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>
